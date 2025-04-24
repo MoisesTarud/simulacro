@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicios Básicos</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 0 auto; padding: 20px; }
+        button { 
+            padding: 10px 15px; 
+            margin: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        div { margin: 15px 0; padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h2>Ejercicios JavaScript</h2>
+    
+    <button onclick="cuadrado()">1. Calcular Cuadrado</button>
+    <div id="result1"></div>
+    
+    <button onclick="saludar()">2. Saludar</button>
+    <div id="result2"></div>
+    
+    <button onclick="adivinar()">3. Adivinar Número</button>
+    <div id="result3"></div>
+
+    <script>
+        // Ejercicio 1: Calcular cuadrado
+        function cuadrado() {
+            const num = prompt("Ingresa un número:");
+            const resultado = num * num;
+            document.getElementById("result1").innerHTML = 
+                `El cuadrado de ${num} es: ${resultado}`;
+        }
+        
+        // Ejercicio 2: Saludar
+        function saludar() {
+            const nombre = prompt("¿Cómo te llamas?");
+            document.getElementById("result2").innerHTML = 
+                nombre ? `¡Hola ${nombre}!` : "No ingresaste nombre";
+        }
+        
+        // Ejercicio 3: Adivinar número
+        function adivinar() {
+            const numeroSecreto = Math.floor(Math.random() * 100) + 1;
+            let intentos = 5;
+            
+            function intentar() {
+                const intento = parseInt(prompt("Adivina el número (1-100):"));
+                
+                if(isNaN(intento)) {
+                    alert("Debes ingresar un número");
+                    return intentar();
+                }
+                
+                intentos--;
+                
+                if(intento === numeroSecreto) {
+                    document.getElementById("result3").innerHTML = 
+                        `¡Correcto! Era ${numeroSecreto}`;
+                } 
+                else if(intentos === 0) {
+                    document.getElementById("result3").innerHTML = 
+                        `¡Perdiste! El número era ${numeroSecreto}`;
+                }
+                else {
+                    const pista = intento < numeroSecreto ? "mayor" : "menor";
+                    alert(`El número es ${pista}. Te quedan ${intentos} intentos`);
+                    intentar();
+                }
+            }
+            
+            intentar();
+        }
+    </script>
+</body>
+</html>
